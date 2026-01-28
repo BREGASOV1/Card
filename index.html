@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic Box</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* المشهد */
+.scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url("./room.jpg") no-repeat center center;
+    background-size: contain;
+}
+
+/* ✨ أنيميشن عام */
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🧙‍♀️ فقاعة الساحرة */
+.witch-text {
+    position: absolute;
+    top: 8%;
+    left: 10%;
+    max-width: 320px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    padding: 14px 16px;
+    border-radius: 16px;
+    font-size: clamp(14px, 2vw, 18px);
+    animation: floatIn 1.2s ease forwards;
+}
+
+/* ذيل الفقاعة */
+.witch-text::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 30px;
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.65) transparent transparent;
+}
+
+/* 🦁 فقاعة الأسد */
+.lion-text {
+    position: absolute;
+    bottom: 18%;
+    right: 8%;
+    max-width: 300px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    padding: 14px 16px;
+    border-radius: 16px;
+    font-size: clamp(14px, 2vw, 18px);
+    animation: floatIn 1.6s ease forwards;
+}
+
+/* ذيل الأسد */
+.lion-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 30px;
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.65) transparent transparent;
+}
+
+/* 🔵 منطقة الصندوق – نازلة أكتر */
+.box-click {
+    position: absolute;
+    top: 63%;
+    left: 48%;
+    width: 9%;
+    height: 9%;
+    cursor: pointer;
+}
+
+/* الخلفية المعتمة */
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 999;
+    overflow-y: auto;
+}
+
+/* البطاقة */
+.popup {
+    position: relative;
+    margin: 40px auto;
+    width: min(92%, 520px);
+}
+
+/* صورة البطاقة */
+.popup img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ✨ النص الذهبي – يعبي الرسالة */
+
+
+/* زر الإغلاق */
+.close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 32px;
+    height: 32px;
+    background: crimson;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* 📱 موبايل */
+@media (max-width: 600px) {
+    .box-click {
+        top: 65%;
+        left: 46%;
+        width: 13%;
+        height: 11%;
+    }
+
+    .witch-text,
+    .lion-text {
+        max-width: 85%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <div class="witch-text">
+        Hey, we have done our searchers and we found this box
+    </div>
+
+    <div class="lion-text">
+        It will open once you tap on it
+    </div>
+
+    <div class="box-click" onclick="openCard()"></div>
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <div class="close" onclick="closeCard()">×</div>
+
+        <img src="./card.jpg" alt="Good Luck Card">
+
+        <div class="card-text">
+            This card will brings you all the good luck in your next step.<br><br>
+            It also can be used before exams.<br>
+            Be cool and do not overwhelm yourself.
+        </div>
+    </div>
+</div>
+
+<script>
+function openCard() {
+    document.getElementById("overlay").style.display = "block";
+}
+function closeCard() {
+    document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
